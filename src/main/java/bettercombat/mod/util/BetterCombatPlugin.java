@@ -1,19 +1,16 @@
 package bettercombat.mod.util;
 
-import fermiumbooter.FermiumRegistryAPI;
+import com.google.common.collect.Lists;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
+import zone.rong.mixinbooter.IEarlyMixinLoader;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Map;
 
 @IFMLLoadingPlugin.Name("BetterCombat")
 @IFMLLoadingPlugin.MCVersion("1.12.2")
-public class BetterCombatPlugin implements IFMLLoadingPlugin {
-
-    public BetterCombatPlugin() {
-        FermiumRegistryAPI.enqueueMixin(false, "mixins.bettercombatmod.json");
-    }
-
+public class BetterCombatPlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
     @Override
     public String[] getASMTransformerClass() {
         return new String[0];
@@ -36,5 +33,10 @@ public class BetterCombatPlugin implements IFMLLoadingPlugin {
     @Override
     public String getAccessTransformerClass() {
         return null;
+    }
+
+    @Override
+    public List<String> getMixinConfigs() {
+        return Lists.newArrayList("mixins.bettercombatmod.json");
     }
 }
